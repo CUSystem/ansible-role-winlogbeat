@@ -4,9 +4,15 @@
 winlogbeat.event_logs:
   {{ winlogbeat.event_logs | to_json }}
 
-# Processors
-processors:
-  {{ processors |  to_json }}
+# Fields and tags
+
+{% if winlogbeat_tags  %}
+tags: {{ winlogbeat_tags | to_json }}
+{% endif %}
+
+{% if winlogbeat_fields  %}
+fields: {{ winlogbeat_fields | to_json }}
+{% endif %}
 
 
 #Output

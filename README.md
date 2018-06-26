@@ -32,14 +32,21 @@ https://docs.ansible.com/ansible/2.5/user_guide/windows_winrm.html
       - name: Security
       - name: System
 
-### Processors can be added to add or transform fields:
+### Tags and Fields can be added :
 
-    winlogbeat_processors:
-    #- include_fields:
-    #    fields: ["cpu"]
-    #- drop_fields:
-    #    fields: ["cpu.user", "cpu.system"]
 
+    winlogbeat_tags:
+       - service-X
+       - web-tier
+
+
+    winlogbeat_fields:
+       - env: staging
+    
+
+Fields can be set at the top-level or (by default) are under sub-directory:
+   
+    winlogbeat_fields_under_root: false
 
 ### Output Host options:
 
