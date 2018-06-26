@@ -1,0 +1,83 @@
+---
+
+# Events
+winlogbeat.event_logs:
+  {{ winlogbeat.event_logs | to_json }}
+
+# Processors
+processors:
+  {{ processors |  to_json }}
+
+
+#Output
+output:
+{% if winlogbeat_output_elasticsearch_hosts  %}
+  elasticsearch:
+    hosts: {{ winlogbeat_output_elasticsearch_hosts | to_json }}
+{% if winlogbeat_ssl_enabled %}
+    # If any 'ssl' parameters are included, defaults to 'true', otherwise defaults to 'false'.  
+    # Can force true or false independent of ssl section settings
+    ssl.enabled: {{ winlogbeat_ssl_enabled }}
+{% endif %}
+{% if winlogbeat_ssl_certificate_authorities %}
+    ssl.certificate_authorities: {{ winlogbeat_ssl_certificate_authorities }}
+{% endif %}
+{% if winlogbeat_ssl_verification_mode %}
+    ssl.verification_mode: {{ winlogbeat_ssl_verification_mode }}
+{% endif %}
+{% if winlogbeat_ssl_cipher_suites %}
+    ssl.cipher_suites: {{ winlogbeat_ssl_cipher_suites }}
+{% endif %}
+{% if winlogbeat_ssl_curve_types %}
+    # Configure curve types for ECDHE based cipher suites
+    ssl.curve_types: {{ winlogbeat_ssl_curve_types }}
+{% endif %}
+{% if winlogbeat_ssl_supported_protocols %}
+    ssl.supported_protocols: {{ winlogbeat_ssl_supported_protocols }}
+{% endif %}
+{% endif %}
+
+{% if winlogbeat_output_logstash_hosts %}
+  logstash:
+    hosts: {{ winlogbeat_output_logstash_hosts | to_json }}
+
+
+
+
+
+
+
+
+{% if winlogbeat_ssl_enabled %}
+    # If any 'ssl' parameters are included, defaults to 'true', otherwise defaults to 'false'.
+    # Can force true or false independent of ssl section settings
+    ssl.enabled: {{ winlogbeat_ssl_enabled }}
+{% endif %}
+{% if winlogbeat_ssl_certificate_authorities %}
+    ssl.certificate_authorities: {{ winlogbeat_ssl_certificate_authorities | to_json }}
+{% endif %}
+{% if winlogbeat_ssl_verification_mode %}
+    ssl.verification_mode: {{ winlogbeat_ssl_verification_mode }}
+{% endif %}
+{% if winlogbeat_ssl_cipher_suites %}
+    ssl.cipher_suites: {{ winlogbeat_ssl_cipher_suites | to_json }}
+{% endif %}
+{% if winlogbeat_ssl_curve_types %}
+    # Configure curve types for ECDHE based cipher suites
+    ssl.curve_types: {{ winlogbeat_ssl_curve_types | to_json }}
+{% endif %}
+{% if winlogbeat_ssl_supported_protocols %}
+    ssl.supported_protocols: {{ winlogbeat_ssl_supported_protocols | to_json}}
+{% endif %}
+{% endif %}
+
+{% if winlogbeat_enable_logging %}
+logging:
+  level: {{ winlogbeat_log_level }}
+  to_files: true
+  to_syslog: false
+  files:
+    path: {{ winlogbeat_log_dir }}
+    name: {{ winlogbeat_log_filename }}
+    keepfiles: 7
+{% endif %}

@@ -1,0 +1,37 @@
+---
+
+winlogbeat_download_url_base: 'https://artifacts.elastic.co/downloads/beats/winlogbeat'
+file_ext: '.zip'
+winlogbeat_download_file: 'winlogbeat-6.3.0-windows-x86_64'
+winlogbeat_install_location: "C:/Program Files/Filebeat"
+
+winlogbeat_events:
+  - name: Application
+  - name: Security
+  - name: System
+
+winlogbeat_processors:
+#- include_fields:
+#    fields: ["cpu"]
+#- drop_fields:
+#    fields: ["cpu.user", "cpu.system"]
+
+winlogbeat_output_elasticsearch_hosts:
+#  - "localhost:9200"
+
+winlogbeat_output_logstash_hosts:
+#  - "localhost:5044"
+
+winlogbeat_enable_logging: false
+winlogbeat_log_level: warning
+winlogbeat_log_dir: "{{ winlogbeat_install_location }}/{{ winblogbeat_download_file }}/logs"
+winlogbeat_log_filename: mybeat.log
+
+winlogbeat_ssl_certificate_authorities: #Collection
+#  - "C:\trust_store\ca.pem"
+winlogbeat_ssl_verification_mode: # none, full
+winlogbeat_ssl_renegotiation: #never, once, freely
+winlogbeat_ssl_supported_protocols: #Collection: [SSLv3, TLSv1, TLSv1.0, TLSv1.1, TLSv1.2]
+winlogbeat_ssl_cipher_suites: #Collection - See docs for available types
+winlogbeat_ssl_curve_types: #Collection - [P-256, P-384, P521]
+winlogbeat_ssl_enabled: # true, false

@@ -1,0 +1,40 @@
+---
+
+- name: Remove service
+  win_service:
+    name: winlogbeat
+    state: absent
+
+- name: Remove any previous winlogbeat
+  win_file:
+    path: "{{ winlogbeat_install_location }}"
+    state: absent
+
+- name: Recreate directory
+  win_file:
+    path: "{{ winlogbeat_install_location }}"
+    state: directory
+
+- name: Get winlogbeat zip
+  win_get_url:
+    url: "{{ winlogbeat_download_url_base }}/{{ winlogbeat_download_file }}{{ file_ext }}"
+    dest: "{{ winlogbeat_install_location }}/{{ winlogbeat_download_file }}{{ file_ext }}"
+
+- name: Unzip winlogbeat
+  win_unzip:
+    src: "{{ winlogbeat_install_location }}/{{ winlogbeat_download_file }}{{ file_ext }}"
+    dest: "{{ winlogbeat_install_location }}"
+
+- name: Install the service via script
+  win_command: powershell.exe -ExecutionPolicy ByPass -File "{{ winlogbeat_install_location }}/{{ winlogbeat_download_file }}/install-service-winlogbeat.ps1"
+  args:
+    chdir: "{{ winlogbeat_install_location }}/{{ winlogbeat_download_file }}"
+
+- name: Copy WinLogBeat configuration.
+  win_template:
+    src: winlogbeat.yml.j2
+    dest: "{{ winlogbeat_install_location }}/{{ winlogbeat_download_file }}/winlogbeatbeat.yml"
+  notify: restart winlogbeat
+
+
+
