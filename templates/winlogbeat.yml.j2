@@ -1,7 +1,7 @@
 ---
 
 # Events
-winlogbeat.event_logs:
+winlogbeat_event_logs:
   {{ winlogbeat.event_logs | to_json }}
 
 # Fields and tags
@@ -12,6 +12,10 @@ tags: {{ winlogbeat_tags | to_json }}
 
 {% if winlogbeat_fields  %}
 fields: {{ winlogbeat_fields | to_json }}
+{% endif %}
+
+{% if winlogbeat_fields_under_root  %}
+fields_under_root: {{ winlogbeat_fields_under_root }}
 {% endif %}
 
 
@@ -46,14 +50,6 @@ output:
 {% if winlogbeat_output_logstash_hosts %}
   logstash:
     hosts: {{ winlogbeat_output_logstash_hosts | to_json }}
-
-
-
-
-
-
-
-
 {% if winlogbeat_ssl_enabled %}
     # If any 'ssl' parameters are included, defaults to 'true', otherwise defaults to 'false'.
     # Can force true or false independent of ssl section settings

@@ -33,7 +33,7 @@
 - name: Copy WinLogBeat configuration.
   win_template:
     src: winlogbeat.yml.j2
-    dest: "{{ winlogbeat_install_location }}/{{ winlogbeat_download_file }}/winlogbeatbeat.yml"
+    dest: "{{ winlogbeat_install_location }}/{{ winlogbeat_download_file }}/winlogbeat.yml"
   notify: restart winlogbeat
 
 

@@ -27,7 +27,7 @@ https://docs.ansible.com/ansible/2.5/user_guide/windows_winrm.html
 
 ### Example ( Default) Input:
 
-    winlogbeat_events:
+    winlogbeat_event_logs:
       - name: Application
       - name: Security
       - name: System
@@ -76,7 +76,7 @@ Adding hosts enables that output.  No defaults provided.  Therefore, one or both
 
     winlogbeat_enable_logging: false
     winlogbeat_log_level: warning
-    winlogbeat_log_dir: "{{ winlogbeat_install_location }}/{{ winblogbeat_download_file }}/logs"
+    winlogbeat_log_dir: "{{ winlogbeat_install_location }}/{{ winlogbeat_download_file }}/logs"
     winlogbeat_log_filename: mybeat.log
 
 ### License 
