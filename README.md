@@ -41,9 +41,10 @@ https://docs.ansible.com/ansible/2.5/user_guide/windows_winrm.html
 
 
     winlogbeat_fields:
-       - env: staging
-    
+       env: staging
+       system: app
 
+(Note, fields are sub items, not list)
 Fields can be set at the top-level or (by default) are under sub-directory:
    
     winlogbeat_fields_under_root: false
