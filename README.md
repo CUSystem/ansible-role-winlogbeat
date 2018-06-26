@@ -72,6 +72,13 @@ Adding hosts enables that output.  No defaults provided.  Therefore, one or both
     winlogbeat_log_dir: "{{ winlogbeat_install_location }}/{{ winblogbeat_download_file }}/logs"
     winlogbeat_log_filename: mybeat.log
 
-## Author Information
+### License 
 
-Created by [Joel Shure]
+The MIT License (MIT)
+
+
+### Attribution
+
+(c) Regents of the University of Colorado
+
+
