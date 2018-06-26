@@ -1,8 +1,8 @@
 ---
 
 # Events
-winlogbeat_event_logs:
-  {{ winlogbeat.event_logs | to_json }}
+winlogbeat.event_logs:
+  {{ winlogbeat_event_logs | to_json }}
 
 # Fields and tags
 
